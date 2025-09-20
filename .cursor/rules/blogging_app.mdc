@@ -1,0 +1,109 @@
+---
+description: Core rules, conventions, and architectural guidelines for the Blogging App with User Authentication and Post Management project.
+globs:
+alwaysApply: true
+---
+
+## Project Overview: Blogging App with User Authentication and Post Management
+You are an expert full-stack developer working on the Blogging App codebase. Your primary goal is to build a modern web application that allows users to register, create, edit, and share blog posts with a clean, responsive UI and user authentication system.
+
+Adhere strictly to the rules, patterns, and conventions outlined in this document to ensure code quality, consistency, and maintainability.
+
+## Technology Stack
+The project uses the following technologies. Do not introduce new libraries or frameworks without explicit instruction.
+
+- Language: TypeScript
+- Main Framework: Next.js 15 (App Router)
+- Database & Auth: Supabase (PostgreSQL, Auth, Storage)
+- Styling: Tailwind CSS v4 with Radix UI components
+- State Management: React Context API for authentication state. Use useState or useReducer for local component state in Client Components.
+- API Communication: Use Next.js Server Actions for mutations (creating posts, updating profiles). Fetch data in Server Components using the Supabase client.
+- UI Components: Radix UI (Button, Card, Input, Label) with custom styling
+- Markdown Rendering: `react-markdown` for post content (coming soon)
+
+## Architecture & Code Style
+
+- Directory Structure: Follow the standard Next.js App Router structure.
+    - `/app` for routes and pages (auth, dashboard, posts, etc.)
+    - `/components/ui` for Radix UI base components
+    - `/components/` for custom, reusable components (Header, auth-forms, ProtectedRoute)
+    - `/contexts/` for React Context providers (AuthContext)
+    - `/lib` for Supabase client setup, utility functions, and Server Actions
+
+- Component Design: Prefer Server Components for fetching and displaying data. Use Client Components ('use client') only when interactivity (hooks, event listeners, forms) is required.
+- Naming Conventions: Component files should be PascalCase (BlogPostForm.tsx). Utility and action functions should be camelCase (createPost.ts).
+- Error Handling: Use try/catch blocks within Server Actions and Route Handlers. Use Next.js error.tsx files for handling errors within route segments.
+- Environment Variables: Never hardcode secrets. Use environment variables (.env.local) for Supabase URL and keys, accessed via process.env.NEXT_PUBLIC_SUPABASE_URL and process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY. Always validate environment variables with proper error messages.
+
+## Code Patterns to Follow
+
+### Authentication
+- Use Supabase Auth for user registration, login, and session management
+- Implement React Context for global authentication state
+- Use ProtectedRoute component for route protection
+- Always check authentication status before protected operations
+
+### Data Fetching
+- Fetch data directly in Server Components using the Supabase client
+- Do not fetch data on the client side using useEffect and useState in page components
+- Use proper TypeScript types for database schema
+
+### Form Handling
+- Use forms that call Server Actions to handle data submission
+- Keep client-side JavaScript minimal
+- Implement proper form validation and error handling
+- Use Radix UI form components for consistency
+
+### Database Operations
+- Use Row Level Security (RLS) policies for data protection
+- Implement proper error handling for all database operations
+- Use transactions for related operations
+- Validate data before database operations
+
+## Key Features Implementation
+
+### User Authentication
+- Email/password sign-up with validation
+- Secure authentication with session persistence
+- Protected routes with automatic redirects
+- User profile management and session cleanup
+
+### Blog Post Management
+- Create, edit, and delete blog posts (UI ready, database integration pending)
+- Markdown support for post content (coming soon)
+- Post discovery and trending features (coming soon)
+- Search and filter functionality (coming soon)
+
+### UI/UX
+- Responsive design (mobile & desktop)
+- Dark mode support
+- Modern UI with Radix UI components
+- Clean, accessible interface
+
+## Security Guidelines
+
+- Always validate user inputs on both client and server
+- Use proper authentication checks for protected operations
+- Implement proper session management
+- Use environment variables for all secrets
+- Sanitize user-generated content before rendering
+
+## Performance Guidelines
+
+- Use dynamic imports for code splitting
+- Implement proper caching strategies
+- Optimize images with Next.js Image component
+- Use proper metadata for SEO
+
+## Verification Checklist
+Before finalizing your response, you MUST verify the following:
+
+- Does the code use Next.js 15 App Router and Server Components for data fetching?
+- Are Server Actions used for data mutations (forms)?
+- Is the Supabase client used for all database interactions?
+- Are Radix UI components used for the UI where appropriate?
+- Are Supabase keys and other secrets loaded from environment variables and not hardcoded?
+- Is proper authentication checking implemented for protected operations?
+- Are environment variables validated with proper error messages?
+- Is the code following the established directory structure?
+- Are TypeScript types properly defined for all data structures?
