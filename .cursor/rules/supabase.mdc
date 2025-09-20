@@ -1,0 +1,36 @@
+# Supabase Rules
+
+## Client Configuration
+- Always validate environment variables before creating client
+- Use proper TypeScript types for database schema
+- Implement proper error handling for database operations
+
+```typescript
+// ✅ Good Supabase client setup
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing Supabase environment variables')
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+```
+
+## Authentication
+- Always check authentication status before protected operations
+- Use proper session management
+- Implement proper logout cleanup
+- Handle authentication errors gracefully
+
+## Database Operations
+- Use Row Level Security (RLS) policies
+- Implement proper error handling for all database operations
+- Use transactions for related operations
+- Validate data before database operations
+
+## Security
+- Never expose sensitive data in client-side code
+- Use server-side operations for sensitive data
+- Implement proper authorization checks
+- Use environment variables for all secrets

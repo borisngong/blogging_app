@@ -1,0 +1,33 @@
+# TypeScript Rules
+
+## Type Safety
+- Always use explicit types for function parameters and return values
+- Avoid `any` type - use `unknown` or specific types instead
+- Use type guards for runtime type checking
+- Prefer interfaces over types for object shapes
+
+## Environment Variables
+- Never use non-null assertions (`!`) on environment variables
+- Always validate environment variables with proper error messages
+- Use type-safe environment variable access
+
+```typescript
+// ❌ Bad
+const apiUrl = process.env.API_URL!
+
+// ✅ Good
+const apiUrl = process.env.API_URL
+if (!apiUrl) {
+  throw new Error('API_URL environment variable is required')
+}
+```
+
+## Error Handling
+- Use proper error types and custom error classes
+- Always handle async operations with try-catch
+- Provide meaningful error messages
+
+## React/Next.js Specific
+- Use proper typing for props and state
+- Prefer `React.FC` or explicit prop types
+- Use Next.js specific types like `NextPage`, `GetServerSideProps`

@@ -1,0 +1,37 @@
+# Performance Rules
+
+## Code Splitting
+- Use dynamic imports for large components
+- Implement route-based code splitting
+- Lazy load non-critical components
+- Use React.lazy for component splitting
+
+```typescript
+// ✅ Good code splitting
+const BlogEditor = lazy(() => import('./BlogEditor'))
+const UserDashboard = lazy(() => import('./UserDashboard'))
+```
+
+## Image Optimization
+- Use Next.js Image component
+- Implement proper image sizing
+- Use appropriate image formats (WebP, AVIF)
+- Implement lazy loading for images
+
+## Bundle Optimization
+- Analyze bundle size regularly
+- Remove unused dependencies
+- Use tree shaking effectively
+- Implement proper caching strategies
+
+## Database Performance
+- Use proper database indexes
+- Implement pagination for large datasets
+- Use database connection pooling
+- Optimize queries and avoid N+1 problems
+
+## Caching
+- Implement proper HTTP caching
+- Use React Query for data caching
+- Cache expensive computations
+- Implement proper cache invalidation

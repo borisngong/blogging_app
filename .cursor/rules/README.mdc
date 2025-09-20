@@ -1,0 +1,28 @@
+# Cursor Rules for Blogging App
+
+This directory contains specific rules for different aspects of the blogging app development.
+
+## Rule Files
+
+- **typescript.mdc** - TypeScript best practices and type safety
+- **nextjs.mdc** - Next.js 15 App Router patterns and performance
+- **supabase.mdc** - Supabase client configuration and database operations
+- **react.mdc** - React component patterns and state management
+- **tailwind.mdc** - Tailwind CSS usage and responsive design
+- **testing.mdc** - Testing strategies with Jest and React Testing Library
+- **security.mdc** - Security best practices and authentication
+- **performance.mdc** - Performance optimization and code splitting
+- **git.mdc** - Git workflow and commit conventions
+
+## Usage
+
+These rules are automatically loaded by Cursor and will provide context-aware suggestions and code generation that follows the established patterns for this blogging app.
+
+## Key Principles
+
+1. **Type Safety** - Always use proper TypeScript types
+2. **Security First** - Validate inputs and protect sensitive data
+3. **Performance** - Optimize for speed and user experience
+4. **Accessibility** - Ensure the app is usable by everyone
+5. **Testing** - Write comprehensive tests for all features
+6. **Documentation** - Keep code and documentation up to date

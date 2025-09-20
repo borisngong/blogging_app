@@ -1,0 +1,37 @@
+# Tailwind CSS Rules
+
+## Class Organization
+- Use consistent class ordering
+- Group related classes together
+- Use responsive prefixes consistently
+- Prefer utility classes over custom CSS
+
+## Responsive Design
+- Mobile-first approach
+- Use proper breakpoints (sm, md, lg, xl, 2xl)
+- Test on multiple screen sizes
+- Use proper spacing and typography scales
+
+```tsx
+// ✅ Good Tailwind usage
+<div className="flex flex-col md:flex-row gap-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+    Blog Post Title
+  </h2>
+  <p className="text-gray-600 dark:text-gray-300">
+    Post content here
+  </p>
+</div>
+```
+
+## Dark Mode
+- Use dark: prefix for dark mode styles
+- Test both light and dark themes
+- Use CSS variables for consistent theming
+- Implement proper color contrast
+
+## Component Consistency
+- Use consistent spacing (4, 8, 12, 16, 24, 32)
+- Use consistent border radius
+- Use consistent shadow styles
+- Create reusable component patterns
