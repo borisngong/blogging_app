@@ -2,6 +2,46 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Home page component that serves as the main landing page for the blogging app.
+ * 
+ * Description: This component renders the primary landing page that introduces
+ * users to the blogging platform. It provides an attractive welcome interface
+ * with call-to-action buttons, feature descriptions, and navigation options
+ * to help users understand and access the app's functionality.
+ * 
+ * Purpose: This function is essential for user onboarding and first impressions
+ * in the blogging app. It serves as the entry point for new and returning users,
+ * providing clear navigation to key features like browsing posts and creating
+ * content. Without this component, users would lack a welcoming introduction
+ * to the platform and clear paths to access its features.
+ * 
+ * Assumptions:
+ * - The UI components (Button, Card, Link) are available and properly styled
+ * - The Next.js Link component is available for client-side navigation
+ * - The Tailwind CSS classes are properly configured for styling
+ * - The responsive design classes work correctly across devices
+ * - The navigation routes (/posts, /posts/create) are accessible
+ * - The dark mode styling is properly configured
+ * 
+ * Edge Cases:
+ * - Handles responsive layout for different screen sizes
+ * - Manages dark mode display correctly
+ * - Handles cases where navigation links are broken
+ * - Provides fallback display for missing content
+ * - Manages loading states for component rendering
+ * - Handles cases where UI components fail to load
+ * 
+ * Component Connections:
+ * - Renders Radix UI components for consistent styling
+ * - Integrates with Next.js Link for client-side navigation
+ * - Uses Tailwind CSS for responsive design and theming
+ * - Provides navigation to posts browsing and creation features
+ * - Serves as the main entry point for the application
+ * - Displays feature cards to explain app functionality
+ * 
+ * @returns JSX element containing the home page interface
+ */
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">

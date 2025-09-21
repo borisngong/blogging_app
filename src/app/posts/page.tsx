@@ -9,6 +9,45 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+/**
+ * Posts page component that displays a grid of blog posts for browsing.
+ * 
+ * Description: This component renders a page that displays a collection of blog posts
+ * in a responsive grid layout. It shows post cards with titles, descriptions, content
+ * previews, and "Read More" buttons for navigation to individual post pages.
+ * Currently displays mock data while database integration is pending.
+ * 
+ * Purpose: This function is essential for content discovery in the blogging app.
+ * It provides users with a way to browse and discover blog posts, serving as the
+ * main content browsing interface. Without this component, users cannot explore
+ * the platform's content or find posts to read.
+ * 
+ * Assumptions:
+ * - The UI components (Card, Button, Link) are available and properly styled
+ * - The Next.js Link component is available for client-side navigation
+ * - The Tailwind CSS classes are properly configured for responsive design
+ * - The post routes (/posts/[id]) are accessible and functional
+ * - The mock data structure represents the expected post data format
+ * - The responsive grid layout works correctly across devices
+ * 
+ * Edge Cases:
+ * - Handles responsive layout for different screen sizes
+ * - Manages display when no posts are available
+ * - Handles cases where post data is incomplete or missing
+ * - Provides fallback display for broken navigation links
+ * - Manages loading states for post data retrieval
+ * - Handles cases where UI components fail to load
+ * 
+ * Component Connections:
+ * - Renders Radix UI components for consistent styling
+ * - Integrates with Next.js Link for post navigation
+ * - Uses Tailwind CSS for responsive grid layout
+ * - Provides navigation to individual post pages
+ * - Displays mock post data (TODO: integrate with actual post data)
+ * - Serves as the main content browsing interface
+ * 
+ * @returns JSX element containing the posts browsing interface
+ */
 export default function PostsPage() {
   return (
     <div className="container mx-auto py-8">
