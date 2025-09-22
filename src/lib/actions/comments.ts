@@ -304,7 +304,7 @@ export async function deleteComment(
       };
     }
     // Get the post_id before deleting to avoid race (record may be gone after delete)
-    const { data: commentRow, error: selectError } = await client
+    const { data: commentRow, error: selectError } = await supabase
       .from("comments")
       .select("post_id")
       .eq("id", commentId)

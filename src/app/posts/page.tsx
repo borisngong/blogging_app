@@ -73,40 +73,75 @@ export default async function PostsPage() {
           <p className="text-muted-foreground">No posts available yet.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts.map((post) => (
-            <Card key={post.id}>
-              <CardHeader>
-                <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                <div className="text-sm text-muted-foreground mt-2">
-                  <AuthorDisplay
-                    authorId={post.author_id}
-                    createdAt={post.created_at}
-                    variant="compact"
-                    className=""
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="line-clamp-3">
-                  {post.content.length > 150
-                    ? `${post.content.substring(0, 150)}...`
-                    : post.content}
-                </p>
-              </CardContent>
-              <CardFooter>
-                <div className="flex items-center justify-between w-full">
-                  <div />
-                  <div className="flex items-center gap-4">
-                    <LikeButton postId={post.id} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {posts.map((post) => {
+            const words = post.content ? post.content.split(/\s+/).length : 0;
+            const readTime = Math.max(1, Math.ceil(words / 200));
+            return (
+              <article
+                key={post.id}
+                aria-labelledby={`post-${post.id}-title`}
+                className="group"
+              >
+                <Card className="h-full shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                  <div className="rounded-t-md overflow-hidden bg-gradient-to-r from-slate-700 via-slate-600 to-slate-500 p-4 text-white">
                     <Link href={`/posts/${post.id}`}>
-                      <Button>Read More</Button>
+                      <CardTitle
+                        id={`post-${post.id}-title`}
+                        className="text-lg md:text-xl font-semibold line-clamp-2 hover:underline"
+                      >
+                        {post.title}
+                      </CardTitle>
                     </Link>
+                    <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+                      <AuthorDisplay
+                        authorId={post.author_id}
+                        createdAt={post.created_at}
+                        variant="compact"
+                      />
+                      <div className="flex items-center gap-3">
+                        <span>{readTime} min read</span>
+                        <span className="hidden sm:inline">•</span>
+                        <span className="text-muted-foreground">
+                          {new Date(post.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </CardFooter>
-            </Card>
-          ))}
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground line-clamp-4">
+                      {post.content.length > 220
+                        ? `${post.content.substring(0, 220)}...`
+                        : post.content}
+                    </p>
+
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {post.tags.map((t: string) => (
+                          <span
+                            key={t}
+                            className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                  <CardFooter>
+                    <div className="flex items-center justify-between w-full">
+                      <LikeButton postId={post.id} />
+                      <Link href={`/posts/${post.id}`}>
+                        <Button variant="ghost" size="sm">
+                          Read More
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </article>
+            );
+          })}
         </div>
       )}
     </div>
