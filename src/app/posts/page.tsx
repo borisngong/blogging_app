@@ -11,20 +11,21 @@ import Link from "next/link";
 import { getPosts } from "@/lib/actions/posts";
 import PostsPageHeader from "@/components/PostsPageHeader";
 import AuthorDisplay from "@/components/AuthorDisplay";
+import LikeButton from "@/components/LikeButton";
 
 /**
  * Posts page component that displays a grid of blog posts for browsing.
- * 
+ *
  * Description: This component renders a page that displays a collection of blog posts
  * in a responsive grid layout. It shows post cards with titles, descriptions, content
  * previews, and "Read More" buttons for navigation to individual post pages.
  * Fetches real data from the Supabase database.
- * 
+ *
  * Purpose: This function is essential for content discovery in the blogging app.
  * It provides users with a way to browse and discover blog posts, serving as the
  * main content browsing interface. Without this component, users cannot explore
  * the platform's content or find posts to read.
- * 
+ *
  * Assumptions:
  * - The UI components (Card, Button, Link) are available and properly styled
  * - The Next.js Link component is available for client-side navigation
@@ -32,7 +33,7 @@ import AuthorDisplay from "@/components/AuthorDisplay";
  * - The post routes (/posts/[id]) are accessible and functional
  * - The database contains published posts
  * - The responsive grid layout works correctly across devices
- * 
+ *
  * Edge Cases:
  * - Handles responsive layout for different screen sizes
  * - Manages display when no posts are available
@@ -40,7 +41,7 @@ import AuthorDisplay from "@/components/AuthorDisplay";
  * - Provides fallback display for broken navigation links
  * - Manages loading states for post data retrieval
  * - Handles cases where UI components fail to load
- * 
+ *
  * Component Connections:
  * - Renders Radix UI components for consistent styling
  * - Integrates with Next.js Link for post navigation
@@ -48,7 +49,7 @@ import AuthorDisplay from "@/components/AuthorDisplay";
  * - Provides navigation to individual post pages
  * - Fetches real post data from Supabase database
  * - Serves as the main content browsing interface
- * 
+ *
  * @returns JSX element containing the posts browsing interface
  */
 export default async function PostsPage() {
@@ -77,27 +78,32 @@ export default async function PostsPage() {
             <Card key={post.id}>
               <CardHeader>
                 <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-                <CardDescription>
-                  <AuthorDisplay 
-                    authorId={post.author_id} 
+                <div className="text-sm text-muted-foreground mt-2">
+                  <AuthorDisplay
+                    authorId={post.author_id}
                     createdAt={post.created_at}
                     variant="compact"
-                    className="mt-2"
+                    className=""
                   />
-                </CardDescription>
+                </div>
               </CardHeader>
               <CardContent>
                 <p className="line-clamp-3">
-                  {post.content.length > 150 
-                    ? `${post.content.substring(0, 150)}...` 
-                    : post.content
-                  }
+                  {post.content.length > 150
+                    ? `${post.content.substring(0, 150)}...`
+                    : post.content}
                 </p>
               </CardContent>
               <CardFooter>
-                <Link href={`/posts/${post.id}`}>
-                  <Button>Read More</Button>
-                </Link>
+                <div className="flex items-center justify-between w-full">
+                  <div />
+                  <div className="flex items-center gap-4">
+                    <LikeButton postId={post.id} />
+                    <Link href={`/posts/${post.id}`}>
+                      <Button>Read More</Button>
+                    </Link>
+                  </div>
+                </div>
               </CardFooter>
             </Card>
           ))}
