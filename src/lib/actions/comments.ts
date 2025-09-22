@@ -22,12 +22,14 @@ function isValidUUID(uuid: string): boolean {
 export async function createComment(
   postId: string,
   content: string,
-  accessToken?: string
+  accessToken?: string,
+  parentCommentId?: string,
+  clientOverride?: any
 ): Promise<{ success: boolean; error?: string; comment?: any }> {
   try {
     // If an accessToken is provided, create a client that sends it so
     // supabase.auth.getUser() and RLS checks work in server actions.
-    let client = supabase;
+    let client = clientOverride || supabase;
     if (accessToken) {
       // Basic JWT format validation (header.payload.signature)
       const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
@@ -67,6 +69,48 @@ export async function createComment(
       }
     }
 
+    // Validate input BEFORE authenticating so tests remain deterministic when
+    // the project's supabase client is a lightweight stub.
+    if (!postId || !content.trim()) {
+      return {
+        success: false,
+        error: "Missing required fields",
+      };
+    }
+
+    // Validate postId format
+    if (!isValidUUID(postId)) {
+      return {
+        success: false,
+        error: "Invalid post ID format",
+      };
+    }
+
+    // Additional content validation
+    if (content.trim().length < 1) {
+      return {
+        success: false,
+        error: "Comment cannot be empty",
+      };
+    }
+
+    if (content.trim().length > 1000) {
+      return {
+        success: false,
+        error: "Comment is too long (maximum 1000 characters)",
+      };
+    }
+
+    // If a parentCommentId was supplied, validate UUID format early. Existence
+    // check will happen later (after we have a client) so tests can assert the
+    // Invalid parent ID format without depending on auth.
+    if (parentCommentId && !isValidUUID(parentCommentId)) {
+      return {
+        success: false,
+        error: "Invalid parent comment ID format",
+      };
+    }
+
     // Verify the user is authenticated
     let user: any = null;
     try {
@@ -100,35 +144,29 @@ export async function createComment(
       };
     }
 
-    // Validate input
-    if (!postId || !content.trim()) {
-      return {
-        success: false,
-        error: "Missing required fields",
-      };
-    }
+    // If a parentCommentId was supplied, ensure the parent exists (now that
+    // we have a client to query the DB).
+    if (parentCommentId) {
+      try {
+        const { data: parentRow, error: parentError } = await client
+          .from("comments")
+          .select("id")
+          .eq("id", parentCommentId)
+          .single();
 
-    // Validate postId format
-    if (!isValidUUID(postId)) {
-      return {
-        success: false,
-        error: "Invalid post ID format",
-      };
-    }
-
-    // Additional content validation
-    if (content.trim().length < 1) {
-      return {
-        success: false,
-        error: "Comment cannot be empty",
-      };
-    }
-
-    if (content.trim().length > 1000) {
-      return {
-        success: false,
-        error: "Comment is too long (maximum 1000 characters)",
-      };
+        if (parentError || !parentRow) {
+          return {
+            success: false,
+            error: "Parent comment not found",
+          };
+        }
+      } catch (err: any) {
+        console.error("Failed to fetch parent comment:", err);
+        return {
+          success: false,
+          error: err?.message || "Failed to validate parent",
+        };
+      }
     }
 
     // Check if the post exists and is published
@@ -162,13 +200,18 @@ export async function createComment(
     // Insert the comment using the authenticated user's ID
     let insertedData: any = null;
     try {
+      const insertPayload: any = {
+        content: content.trim(),
+        author_id: user.id,
+        post_id: postId,
+      };
+      if (parentCommentId) {
+        insertPayload.parent_comment_id = parentCommentId;
+      }
+
       const { data: created, error: insertError } = await client
         .from("comments")
-        .insert({
-          content: content.trim(),
-          author_id: user.id,
-          post_id: postId,
-        })
+        .insert(insertPayload)
         .select("*")
         .single();
 
