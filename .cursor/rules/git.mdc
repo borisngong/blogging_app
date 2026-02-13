@@ -1,0 +1,35 @@
+# Git Rules
+
+## Commit Messages
+- Use conventional commit format
+- Write clear, descriptive commit messages
+- Keep commits atomic and focused
+- Reference issues and PRs when relevant
+
+```bash
+# ✅ Good commit messages
+feat: add user authentication with Supabase
+fix: resolve environment variable validation issue
+docs: update README with setup instructions
+refactor: improve error handling in API routes
+```
+
+## Branch Strategy
+- Use feature branches for new features
+- Use `develop` branch for integration
+- Keep `main` branch stable and deployable
+- Delete merged branches after PR completion
+
+## Pull Requests
+- Write descriptive PR titles and descriptions
+- Include screenshots for UI changes
+- Reference related issues
+- Request appropriate reviewers
+- Use GitHub Copilot for code review
+
+## Code Review
+- Review code for functionality, security, and performance
+- Check for proper error handling
+- Verify tests are included
+- Ensure documentation is updated
+- Use automated tools (CodeRabbit, GitHub Copilot)

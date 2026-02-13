@@ -1,0 +1,39 @@
+# Next.js Rules
+
+## App Router (Next.js 15)
+- Use App Router structure with `app/` directory
+- Place page components in `page.tsx` files
+- Use `layout.tsx` for shared layouts
+- Implement proper loading and error boundaries
+
+## API Routes
+- Use proper HTTP methods and status codes
+- Implement proper error handling
+- Add request validation
+- Use TypeScript for request/response types
+
+```typescript
+// ✅ Good API route structure
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    // validation
+    // business logic
+    return Response.json({ success: true }, { status: 201 })
+  } catch (error) {
+    return Response.json({ error: 'Invalid request' }, { status: 400 })
+  }
+}
+```
+
+## Performance
+- Use dynamic imports for code splitting
+- Implement proper caching strategies
+- Optimize images with Next.js Image component
+- Use proper metadata for SEO
+
+## Security
+- Validate all user inputs
+- Use proper authentication checks
+- Implement CSRF protection
+- Sanitize data before rendering

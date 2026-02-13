@@ -1,0 +1,48 @@
+# React Rules
+
+## Component Structure
+- Use functional components with hooks
+- Keep components small and focused
+- Use proper prop types and interfaces
+- Implement proper error boundaries
+
+## State Management
+- Use React Context for global state
+- Prefer local state when possible
+- Use useReducer for complex state logic
+- Implement proper state updates
+
+```typescript
+// ✅ Good component structure
+interface Props {
+  title: string
+  onSave: (data: FormData) => void
+}
+
+export const BlogPostForm: React.FC<Props> = ({ title, onSave }) => {
+  const [formData, setFormData] = useState<FormData>({})
+  
+  const handleSubmit = useCallback((e: FormEvent) => {
+    e.preventDefault()
+    onSave(formData)
+  }, [formData, onSave])
+  
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* form content */}
+    </form>
+  )
+}
+```
+
+## Performance
+- Use React.memo for expensive components
+- Use useMemo and useCallback appropriately
+- Avoid unnecessary re-renders
+- Implement proper loading states
+
+## Accessibility
+- Use semantic HTML elements
+- Add proper ARIA labels
+- Ensure keyboard navigation
+- Test with screen readers

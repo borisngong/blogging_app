@@ -17,12 +17,12 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
 ## ✨ Features
 
 - 🔑 **User authentication (Supabase Auth + JWT)** - ✅ **IMPLEMENTED**
-- 📝 Create, edit, and delete blog posts - *UI Ready, Database Integration Coming Soon*
-- 💬 Comment system for user interactions - *Coming Soon*
-- 📈 Discover trending posts & follow authors - *Coming Soon*
+- 📝 Create, edit, and delete blog posts - _UI Ready, Database Integration Coming Soon_
+- 💬 Comment system for user interactions - _Coming Soon_
+- 📈 Discover trending posts & follow authors - _Coming Soon_
 - 📱 Responsive design (mobile & desktop) - ✅ **IMPLEMENTED**
-- 🖋️ Markdown support for posts - *Coming Soon*
-- 🔍 Search and filter posts - *Coming Soon*
+- 🖋️ Markdown support for posts - _Coming Soon_
+- 🔍 Search and filter posts - _Coming Soon_
 - 🎨 Modern UI with Radix UI components - ✅ **IMPLEMENTED**
 - 🌙 Dark mode support - ✅ **IMPLEMENTED**
 - ⚡ Fast performance with Next.js 15 - ✅ **IMPLEMENTED**
@@ -38,12 +38,12 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
 - **UI Components:** Radix UI (Button, Card, Input, Label) - ✅ **IMPLEMENTED**
 - **Authentication:** Supabase Auth with JWT tokens - ✅ **IMPLEMENTED**
 - **State Management:** React Context API - ✅ **IMPLEMENTED**
-- **Backend:** Next.js API Routes (Node.js) - *Ready for Implementation*
-- **Database:** Supabase (PostgreSQL) - *Schema Ready, Integration Pending*
-- **Storage:** Supabase Storage - *Coming Soon*
-- **Markdown Rendering:** `react-markdown` - *Coming Soon*
-- **Testing:** Jest (unit/integration), React Testing Library - *Coming Soon*
-- **Deployment:** Vercel (frontend & backend), Supabase (database) - *Ready for Deployment*
+- **Backend:** Next.js API Routes (Node.js) - _Ready for Implementation_
+- **Database:** Supabase (PostgreSQL) - _Schema Ready, Integration Pending_
+- **Storage:** Supabase Storage - _Coming Soon_
+- **Markdown Rendering:** `react-markdown` - _Coming Soon_
+- **Testing:** Jest (unit/integration), React Testing Library - _Coming Soon_
+- **Deployment:** Vercel (frontend & backend), Supabase (database) - _Ready for Deployment_
 - **AI Tooling:** Cursor (IDE), CodeRabbit (PR reviews & commit summaries), OpenAI API (optional for content suggestions)
 
 ---
@@ -140,6 +140,7 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
    ```
 
    **📋 Quick Setup:**
+
    - Get your credentials from [Supabase Dashboard](https://supabase.com/dashboard)
    - Copy the Project URL and Anon Key from Settings > API
    - See `SETUP_AUTH.md` for detailed instructions
@@ -151,6 +152,7 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
    ```
 
 5. **Set up database schema** (Optional for basic testing)
+
    - Follow the detailed guide in `SETUP_AUTH.md`
    - Run the provided SQL schema in your Supabase dashboard
    - This enables full functionality with user profiles and posts
@@ -161,6 +163,7 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
 ## 🔐 Authentication Features
 
 ### ✅ **Implemented Authentication**
+
 - **User Registration**: Email/password sign-up with validation
 - **User Login**: Secure authentication with session persistence
 - **Protected Routes**: Automatic redirect to login for unauthorized access
@@ -169,6 +172,7 @@ Blogging remains a powerful tool for self-expression, learning, and community-bu
 - **Sign Out**: Secure logout with session cleanup
 
 ### 🎯 **Available Pages**
+
 - **Home** (`/`) - Landing page with feature overview
 - **Posts** (`/posts`) - Browse all blog posts (public)
 - **Create Post** (`/posts/create`) - Write new blog posts (🔒 **Protected**)
@@ -200,16 +204,49 @@ src/
     └── supabase.ts       # Supabase client configuration
 ```
 
-## 🚀 Quick Start Guide
+## � Development & Troubleshooting
+
+### Environment Variables
+
+Make sure to set the following environment variables in your `.env.local` file:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Development Commands
+
+To run the development server, use:
+
+```bash
+npm run dev
+```
+
+### RLS/Auth Tips
+
+When working with server actions, ensure you pass the access token to authenticate requests.
+
+### Hydration Fix
+
+If you encounter issues with `<div>` elements inside `<p>`, ensure proper nesting to avoid hydration errors.
+
+### getServerClient Import Note
+
+Make sure to import `getServerClient` correctly to avoid runtime errors.
+
+## �🚀 Quick Start Guide
 
 ### 1. **Clone and Install**
+
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/borisngong/blogging_app.git
 cd blogging_app
 npm install
 ```
 
 ### 2. **Set up Supabase** (5 minutes)
+
 1. Create account at [supabase.com](https://supabase.com)
 2. Create new project
 3. Get your Project URL and Anon Key from Settings > API
@@ -220,11 +257,13 @@ npm install
    ```
 
 ### 3. **Run the App**
+
 ```bash
 npm run dev
 ```
 
 ### 4. **Test Authentication**
+
 - Visit `http://localhost:3000`
 - Click "Sign In" → "Sign Up" to create account
 - Test protected routes (Dashboard, Create Post)
@@ -232,6 +271,7 @@ npm run dev
 ## 📋 Current Status
 
 ### ✅ **Ready to Use**
+
 - Complete authentication system with Supabase
 - Responsive UI with dark mode support
 - Protected routes with automatic redirects
@@ -240,6 +280,7 @@ npm run dev
 - Form validation and error handling
 
 ### 🔄 **Next Steps** (Optional)
+
 - Set up database schema (see `SETUP_AUTH.md`)
 - Implement post creation/editing with Supabase
 - Add user profile management features
@@ -248,18 +289,21 @@ npm run dev
 ## 🔧 Authentication Implementation
 
 ### **Architecture Overview**
+
 - **Supabase Auth**: Handles user registration, login, and session management
 - **React Context**: Global state management for authentication
 - **Protected Routes**: Automatic redirect for unauthorized access
 - **TypeScript**: Full type safety throughout the auth system
 
 ### **Key Components**
+
 - `AuthContext.tsx` - Global authentication state and methods
 - `auth-forms.tsx` - Sign-in/sign-up forms with validation
 - `ProtectedRoute.tsx` - Route protection wrapper component
 - `supabase.ts` - Supabase client configuration
 
 ### **Security Features**
+
 - JWT token validation
 - Row Level Security (RLS) ready
 - Secure password requirements

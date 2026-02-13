@@ -13,6 +13,46 @@ import Link from "next/link";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/contexts/AuthContext";
 
+/**
+ * Dashboard page component for authenticated users to manage their blog posts.
+ * 
+ * Description: This component provides the main dashboard interface for authenticated
+ * users to view, manage, and create their blog posts. It displays a personalized
+ * welcome message, shows a grid of existing posts with edit/delete options, and
+ * provides quick access to post creation functionality.
+ * 
+ * Purpose: This function is essential for the core user experience in the blogging app.
+ * It serves as the central hub where users can manage their content, view their posts,
+ * and access post creation tools. Without this component, users cannot effectively
+ * manage their blog content or access their personalized dashboard.
+ * 
+ * Assumptions:
+ * - The user is authenticated (enforced by ProtectedRoute wrapper)
+ * - The useAuth hook provides valid user information
+ * - The user has access to their posts and metadata
+ * - The ProtectedRoute component is properly configured
+ * - The UI components (Card, Button, Link) are available
+ * - The user's full name or email is available for display
+ * 
+ * Edge Cases:
+ * - Handles cases where user metadata is incomplete or missing
+ * - Manages display when user has no existing posts
+ * - Handles loading states during user data retrieval
+ * - Provides fallback display for missing user information
+ * - Manages responsive layout for different screen sizes
+ * - Handles cases where post data is unavailable
+ * 
+ * Component Connections:
+ * - Wrapped by ProtectedRoute for authentication enforcement
+ * - Uses useAuth hook to access current user information
+ * - Renders Radix UI components for consistent styling
+ * - Integrates with Next.js Link for navigation
+ * - Displays user-specific content and personalized interface
+ * - Provides navigation to post creation and management features
+ * - Shows mock post data (TODO: integrate with actual post data)
+ * 
+ * @returns JSX element containing the user dashboard interface
+ */
 export default function DashboardPage() {
   const { user } = useAuth();
 

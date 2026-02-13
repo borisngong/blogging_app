@@ -1,0 +1,44 @@
+# Security Rules
+
+## Input Validation
+- Validate all user inputs on both client and server
+- Sanitize data before database operations
+- Use proper type checking and validation libraries
+- Implement CSRF protection
+
+## Authentication & Authorization
+- Always verify user authentication before protected operations
+- Use proper session management
+- Implement proper logout functionality
+- Check user permissions for all operations
+
+```typescript
+// ✅ Good authentication check
+export async function createPost(data: PostData) {
+  const { data: { user }, error } = await supabase.auth.getUser()
+  
+  if (error || !user) {
+    throw new Error('Authentication required')
+  }
+  
+  // Proceed with authenticated operation
+}
+```
+
+## Environment Variables
+- Never commit secrets to version control
+- Use proper environment variable validation
+- Use different configurations for different environments
+- Rotate secrets regularly
+
+## Data Protection
+- Use HTTPS in production
+- Implement proper CORS policies
+- Sanitize user-generated content
+- Use proper database permissions (RLS)
+
+## Error Handling
+- Don't expose sensitive information in error messages
+- Log errors securely
+- Implement proper error boundaries
+- Use generic error messages for users
